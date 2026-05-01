@@ -1,0 +1,52 @@
+Đội thi Shosa Degree,
+
+Ban Tổ chức DATATHON 2026 xin gửi đến các đội thi thông báo chính thức về đề bài Vòng Sơ loại của cuộc thi như sau:
+
+Thông tin quan trọng:
+
+Deadline nộp bài: 23:59 ngày 01/05/2026
+
+Đề bài và Dataset:
+
+1. Link đề bài chi tiết: https://drive.google.com/file/d/1KAmM4WL0SLSUKp90Kro2KsNkwNtuR1kx/view?fbclid=IwY2xjawRO6shleHRuA2FlbQIxMQBzcnRjBmFwcF9pZAEwAAEe9D7BNuYQZ9UJ1xbGp67ZOg6Y8E8EYXKmXqSvG2EQ5qe6uEsTrQlkGJAffv4_aem_Bm0BoWslVmTHGAOzVbP2Zg
+2. Link tải dataset: https://www.kaggle.com/competitions/datathon-2026-round-1/overview
+3. Form nộp bài chính thức: https://forms.gle/Ge7GB8itMSW2PkEAA
+
+Link Group hỏi đáp vòng sơ loại: https://www.facebook.com/groups/35001810129462406
+
+Yêu cầu nộp bài
+
+Các đội cần nộp đầy đủ các file sau ở trong Form Nộp Bài Thi:
+
+-) Chọn đáp án đúng cho câu hỏi trắc nghiệm
+-) File báo cáo (PDF)
+-) Link GitHub repository
+-) Link submission trên kaggle
+-) Ảnh chụp thẻ sinh viên của tất cả các thành viên trong đội
+-) Tickbox xác nhận: Nhóm thi cam kết có ít nhất 1 thành viên có thể tham gia trực tiếp vòng chung kết vào ngày 23/05/2026 tại Đại Học VinUni, Hà Nội
+
+Lưu ý quan trọng:
+
+-) Các bài nộp sau deadline sẽ không được chấp nhận
+﻿-) Đảm bảo code có thể chạy được và reproduce kết quả
+﻿-) Tuân thủ đầy đủ quy trình về academic integrity
+﻿-) Liên hệ BTC nếu gặp vấn đề với dataset hoặc đề bài
+
+Nếu có bất kỳ thắc mắc nào liên quan đến đề bài, các đội vui lòng gửi câu hỏi qua form Q&A hoặc liên hệ trực tiếp với Ban Tổ Chức qua email này trước ngày 01/05/2026
+﻿Chúc các đội thi có thời gian làm việc hiệu quả và đạt kết quả tốt nhất!
+
+Trân trọng,
+
+Facebook: Vintelligence﻿
+
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿MR. HUỲNH VIỆT CƯỜNG
+
+Co-Organizer
+
+(+84) 932 462 816
+
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿MR. TRẦN ANH CHƯƠNG
+
+Co-President of VinTelligence
+
+(+84) 354 976 720

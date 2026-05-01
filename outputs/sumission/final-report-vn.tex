@@ -1,0 +1,99 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[T5]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+\setlist[itemize]{noitemsep, topsep=2pt}
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+
+\title{Báo cáo Vòng Sơ Loại DATATHON 2026}
+\author{Đội thi Shosa Degree}
+\date{01/05/2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Bài nộp hoàn thành chuỗi phân tích từ mô tả dữ liệu, chẩn đoán nguyên nhân, dự báo xu hướng đến giải thích mô hình theo đúng rubric của cuộc thi. Doanh thu chịu ảnh hưởng mạnh bởi mùa vụ, khuyến mãi và khả năng cung ứng. Mô hình dự báo tốt nhất là ensemble giữa gradient boosting và seasonal baseline, cải thiện rõ rệt so với baseline về MAE, RMSE và R\textsuperscript{2}. Phần giải thích cho thấy các driver mạnh nhất là độ trễ ngắn hạn, mùa vụ theo ngày trong năm và cùng ngày của năm trước.
+\end{abstract}
+
+\section{Dữ liệu và cách tiếp cận}
+Bộ dữ liệu gồm 15 tệp CSV chia thành 4 lớp: Master, Transaction, Analytical và Operational. Nhóm tuân thủ quy tắc chỉ sử dụng dữ liệu được cung cấp, không dùng biến từ tập test làm đặc trưng, và đánh giá bằng expanding-window validation theo thời gian. Toàn bộ pipeline được tái lập với random seed = 42.
+
+\section{Phân tích EDA}
+\subsection{Descriptive: Điều gì đã xảy ra?}
+Doanh thu thể hiện tính chu kỳ rõ theo năm, với Q4 thường cao hơn nhờ mùa lễ và mua sắm cuối năm. Một số danh mục sản phẩm đóng góp phần lớn doanh thu và số lượng bán ra, cho thấy mức độ tập trung cao.
+
+\subsection{Diagnostic: Tại sao điều đó xảy ra?}
+Doanh thu không chỉ phụ thuộc traffic web mà còn phụ thuộc mạnh vào khả năng cung ứng. Tương quan giữa COGS và doanh thu rất cao, phản ánh vai trò của tồn kho. Tỷ lệ hoàn trả có tính đặc thù theo danh mục và lý do trả hàng phổ biến nhất liên quan đến kích cỡ không phù hợp.
+
+\subsection{Predictive và Prescriptive}
+Dựa trên mùa vụ và các driver đã xác định, nhóm xây dựng forecast và scenario analysis. Các khuyến nghị ưu tiên gồm: tăng khuyến mãi theo mùa, tối ưu kênh acquisition, giảm stockout, điều chỉnh mix sản phẩm và giảm hoàn trả bằng size guide tốt hơn. Mỗi đề xuất đều đi kèm ước lượng ROI.
+
+\section{Dự báo doanh thu}
+\subsection{Baseline an toàn dữ liệu}
+Baseline sử dụng seasonal naive theo ngày của năm trước và linear regression với đặc trưng trễ/các đặc trưng lịch. Validation được thực hiện bằng expanding-window cross-validation để tránh leakage.
+
+\subsection{Mô hình tối ưu}
+Mô hình tốt nhất là ensemble giữa gradient boosting và seasonal baseline. Kết quả CV trung bình:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+Mô hình & MAE & RMSE & R\textsuperscript{2} \\
+\midrule
+Baseline tốt nhất (M6) & 837{,}446.12 & 1{,}134{,}986.03 & 0.2843 \\
+Mô hình tối ưu (M7) & 677{,}003.83 & 908{,}371.80 & 0.5784 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Mô hình tối ưu tốt hơn baseline trên cả ba thước đo, cho thấy việc kết hợp tín hiệu mùa vụ dài hạn với động lực ngắn hạn là hợp lý.
+
+\section{Giải thích mô hình}
+Các biến quan trọng nhất gồm:\begin{itemize}
+\item \texttt{lag\_1}: doanh thu ngày hôm trước;
+\item \texttt{doy\_profile}: cấu trúc mùa vụ theo ngày trong năm;
+\item \texttt{lag\_365}: cùng ngày của năm trước.
+\end{itemize}
+
+Tỷ trọng nhóm đặc trưng trong mô hình tối ưu:
+\begin{itemize}
+\item Nhóm lag: 74.27\%
+\item Nhóm seasonality: 14.02\%
+\item Nhóm rolling: 6.17\%
+\item Nhóm calendar: 3.28\%
+\item Nhóm momentum: 0.85\%
+\end{itemize}
+
+Diễn giải kinh doanh: doanh thu gần hạn có tính bám dính mạnh, và cầu thời trang có mùa vụ theo năm. Điều này phù hợp với thực tế vận hành, trong đó kế hoạch tồn kho, khuyến mãi và logistics cần đồng bộ với mùa vụ và xu hướng gần nhất.
+
+\section{Hàm ý kinh doanh}
+\begin{itemize}
+\item Ưu tiên lập kế hoạch tồn kho theo mùa thay vì chỉ theo traffic.
+\item Khuyến mãi nên tập trung vào các giai đoạn mùa vụ mạnh như Q1, Q3 và Q4.
+\item Cải thiện size guide và mô tả sản phẩm có thể giảm hoàn trả đáng kể.
+\item Tối ưu mix sản phẩm và channel acquisition có thể cải thiện hiệu quả doanh thu trên chi phí.
+\end{itemize}
+
+\section{Kết luận}
+Bài nộp đáp ứng đầy đủ ba phần quan trọng của Vòng Sơ loại: MCQ, EDA và forecasting. Phần EDA chỉ ra các driver kinh doanh có ý nghĩa thực tiễn; phần dự báo tạo được baseline đáng tin cậy và mô hình tối ưu có cải thiện rõ ràng; phần giải thích mô hình minh bạch, có thể kiểm chứng và gắn với ngữ cảnh kinh doanh.
+
+\section*{Phụ lục: Tài nguyên nộp bài}
+\begin{itemize}
+\item Submission Kaggle: \texttt{outputs/submissions/submission.csv}
+\item MCQ: \texttt{docs/competition/first-round/planning/m2-final-answers.csv}
+\item Báo cáo kỹ thuật M6--M8: thư mục \texttt{reports/} và \texttt{docs/competition/first-round/}
+\end{itemize}
+
+\end{document}

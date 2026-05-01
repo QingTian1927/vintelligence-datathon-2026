@@ -1,0 +1,13 @@
+artifact,path,expected_status,observed_status,pass
+MCQ answers,docs\competition\first-round\planning\m2-final-answers.csv,Complete,Present,True
+EDA report M3,docs\competition\first-round\planning\m3-descriptive-eda-report.md,Complete,Present,True
+EDA report M4,docs\competition\first-round\planning\m4-diagnostic-eda-report.md,Complete,Present,True
+EDA report M5,docs\competition\first-round\planning\m5-predictive-prescriptive-eda-report.md,Complete,Present,True
+Forecast report M6,reports\m6-forecasting-baseline-report.md,Complete,Present,True
+Forecast report M7,reports\m7-forecasting-optimization-report.md,Complete,Present,True
+Explainability report M8,reports\m8-explainability-technical-report.md,Complete,Present,True
+Baseline submission,outputs\submissions\m6_submission_baseline.csv,Complete,Present,True
+Optimized submission,outputs\submissions\m7_submission_optimized.csv,Complete,Present,True
+Optimized model comparison,outputs\tables\m7_model_comparison.csv,Complete,Present,True
+Explainability evidence,outputs\tables\m8_feature_importance.csv,Complete,Present,True
+Repo README,README.md,Complete,Present,True
